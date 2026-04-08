@@ -1,0 +1,1 @@
+RENAME TABLE kullanicilar TO Users;
