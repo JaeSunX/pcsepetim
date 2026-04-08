@@ -3,7 +3,7 @@ import { prisma } from '@/lib/prisma'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { rateLimit, getClientIp } from '@/lib/rateLimit'
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcrypt'
 
 // Kullanıcı profilini getir
 export async function GET(request: NextRequest) {

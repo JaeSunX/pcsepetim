@@ -13,7 +13,7 @@ const nextConfig = {
 
   // Next.js 14 - experimental namespace
   experimental: {
-    serverComponentsExternalPackages: ['@prisma/client', 'bcryptjs'],
+    serverComponentsExternalPackages: ['@prisma/client'],
   },
 
   // Üretim için güvenlik başlıkları

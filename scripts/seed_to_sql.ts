@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcrypt'
 
 function escapeValue(value: unknown): string {
   if (value === null || value === undefined) return 'NULL'

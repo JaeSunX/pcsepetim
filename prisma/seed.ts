@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma'
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcrypt'
 
 async function main() {
   console.log('🌱 Veritabanı tohumlanıyor...')
