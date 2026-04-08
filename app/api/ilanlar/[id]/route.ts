@@ -52,7 +52,7 @@ export async function PATCH(
       return NextResponse.json({ hata: 'Giriş yapmanız gerekiyor.' }, { status: 401 })
     }
 
-    const kullanici = await prisma.User.findUnique({
+    const kullanici = await prisma.user.findUnique({
       where: { email: session.user.email },
     })
 
@@ -85,7 +85,7 @@ export async function DELETE(
       return NextResponse.json({ hata: 'Giriş yapmanız gerekiyor.' }, { status: 401 })
     }
 
-    const kullanici = await prisma.User.findUnique({
+    const kullanici = await prisma.user.findUnique({
       where: { email: session.user.email },
     })
 
