@@ -32,7 +32,7 @@ model Ilan {
   fiyat       Float
   kategori    String
   altKategori String?
-  resimler    String    // JSON string dizi
+  resimler    String    @db.Text // JSON string dizi
   durum       String    @default("AKTIF") // AKTIF, PASIF, SATILDI
   sehir       String
   ilce        String?
