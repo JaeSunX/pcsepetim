@@ -16,6 +16,7 @@ model User {
   sehir     String?
   avatar    String?
   biyografi String?
+  emailVerified DateTime?
   ilanlar   Ilan[]
   odemeler  Odeme[]
   olusturma DateTime @default(now())
