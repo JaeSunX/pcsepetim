@@ -83,7 +83,7 @@ async function main() {
   const sifre2 = await bcrypt.hash('sifre123', 10)
   const sifre3 = await bcrypt.hash('sifre123', 10)
 
-  const kullanici1 = await prisma.user.upsert({
+  const kullanici1 = await prisma.User.upsert({
     where: { email: 'demo@teknoel.com' },
     update: {},
     create: {
@@ -96,7 +96,7 @@ async function main() {
     },
   })
 
-  const kullanici2 = await prisma.user.upsert({
+  const kullanici2 = await prisma.User.upsert({
     where: { email: 'ahmet@teknoel.com' },
     update: {},
     create: {
@@ -109,7 +109,7 @@ async function main() {
     },
   })
 
-  const kullanici3 = await prisma.user.upsert({
+  const kullanici3 = await prisma.User.upsert({
     where: { email: 'mehmet@teknoel.com' },
     update: {},
     create: {
@@ -137,8 +137,8 @@ async function main() {
       kategori: 'Bilgisayar Parçaları',
       altKategori: 'Ekran Kartı (GPU)',
       resimler: JSON.stringify([
-        'https://picsum.photos/seed/rtx4090/800/600',
-        'https://picsum.photos/seed/rtx4090b/800/600',
+        'https://loremflickr.com/800/600?lock=1&random=1',
+        'https://loremflickr.com/800/600?lock=2&random=1',
       ]),
       sehir: 'İstanbul',
       ilce: 'Kadıköy',
@@ -157,8 +157,8 @@ async function main() {
       kategori: 'Cep Telefonu',
       altKategori: 'Akıllı Telefon',
       resimler: JSON.stringify([
-        'https://picsum.photos/seed/iphone15/800/600',
-        'https://picsum.photos/seed/iphone15b/800/600',
+        'https://loremflickr.com/800/600?lock=3&random=1',
+        'https://loremflickr.com/800/600?lock=4&random=1',
       ]),
       sehir: 'İstanbul',
       ilce: 'Beşiktaş',
@@ -177,8 +177,8 @@ async function main() {
       kategori: 'Laptop & Notebook',
       altKategori: 'İş Laptopu',
       resimler: JSON.stringify([
-        'https://picsum.photos/seed/macbookm3/800/600',
-        'https://picsum.photos/seed/macbookm3b/800/600',
+        'https://loremflickr.com/800/600?lock=5&random=1',
+        'https://loremflickr.com/800/600?lock=6&random=1',
       ]),
       sehir: 'İzmir',
       ilce: 'Bornova',
@@ -198,8 +198,8 @@ async function main() {
       kategori: 'Oyun Konsolu',
       altKategori: 'PlayStation',
       resimler: JSON.stringify([
-        'https://picsum.photos/seed/ps5slim/800/600',
-        'https://picsum.photos/seed/ps5slimb/800/600',
+        'https://loremflickr.com/800/600?lock=7&random=1',
+        'https://loremflickr.com/800/600?lock=8&random=1',
       ]),
       sehir: 'Ankara',
       ilce: 'Çankaya',
@@ -218,7 +218,7 @@ async function main() {
       kategori: 'Bilgisayar Parçaları',
       altKategori: 'İşlemci (CPU)',
       resimler: JSON.stringify([
-        'https://picsum.photos/seed/ryzen9/800/600',
+        'https://loremflickr.com/800/600?lock=9&random=1',
       ]),
       sehir: 'İstanbul',
       ilce: 'Ümraniye',
@@ -237,8 +237,8 @@ async function main() {
       kategori: 'Cep Telefonu',
       altKategori: 'Akıllı Telefon',
       resimler: JSON.stringify([
-        'https://picsum.photos/seed/s24ultra/800/600',
-        'https://picsum.photos/seed/s24ultrab/800/600',
+        'https://loremflickr.com/800/600?lock=10&random=1',
+        'https://loremflickr.com/800/600?lock=11&random=1',
       ]),
       sehir: 'İzmir',
       ilce: 'Karşıyaka',
@@ -258,7 +258,7 @@ async function main() {
       kategori: 'Monitör',
       altKategori: 'Gaming Monitör',
       resimler: JSON.stringify([
-        'https://picsum.photos/seed/rogmonitor/800/600',
+        'https://loremflickr.com/800/600?lock=12&random=1',
       ]),
       sehir: 'Ankara',
       ilce: 'Keçiören',
@@ -277,7 +277,7 @@ async function main() {
       kategori: 'Oyun Konsolu',
       altKategori: 'Nintendo Switch',
       resimler: JSON.stringify([
-        'https://picsum.photos/seed/switcholed/800/600',
+        'https://loremflickr.com/800/600?lock=13&random=1',
       ]),
       sehir: 'Bursa',
       ilce: 'Osmangazi',
@@ -297,7 +297,7 @@ async function main() {
       kategori: 'Bilgisayar Parçaları',
       altKategori: 'RAM',
       resimler: JSON.stringify([
-        'https://picsum.photos/seed/corsairram/800/600',
+        'https://loremflickr.com/800/600?lock=14&random=1',
       ]),
       sehir: 'İstanbul',
       ilce: 'Maltepe',
@@ -315,8 +315,8 @@ async function main() {
       kategori: 'Tablet',
       altKategori: 'iPad',
       resimler: JSON.stringify([
-        'https://picsum.photos/seed/ipadprom4/800/600',
-        'https://picsum.photos/seed/ipadprom4b/800/600',
+        'https://loremflickr.com/800/600?lock=15&random=1',
+        'https://loremflickr.com/800/600?lock=16&random=1',
       ]),
       sehir: 'İzmir',
       ilce: 'Konak',
@@ -334,7 +334,7 @@ async function main() {
       kategori: 'Aksesuar',
       altKategori: 'Klavye & Mouse',
       resimler: JSON.stringify([
-        'https://picsum.photos/seed/logitechg/800/600',
+        'https://loremflickr.com/800/600?lock=17&random=1',
       ]),
       sehir: 'Ankara',
       ilce: 'Yenimahalle',
@@ -352,7 +352,7 @@ async function main() {
       kategori: 'Bilgisayar Parçaları',
       altKategori: 'Anakart',
       resimler: JSON.stringify([
-        'https://picsum.photos/seed/msianakart/800/600',
+        'https://loremflickr.com/800/600?lock=18&random=1',
       ]),
       sehir: 'İstanbul',
       ilce: 'Bağcılar',
@@ -370,7 +370,7 @@ async function main() {
       kategori: 'Aksesuar',
       altKategori: 'Kulaklık',
       resimler: JSON.stringify([
-        'https://picsum.photos/seed/sonywh/800/600',
+        'https://loremflickr.com/800/600?lock=19&random=1',
       ]),
       sehir: 'İzmir',
       ilce: 'Bayraklı',
@@ -388,7 +388,7 @@ async function main() {
       kategori: 'Oyun Konsolu',
       altKategori: 'Xbox',
       resimler: JSON.stringify([
-        'https://picsum.photos/seed/xboxsx/800/600',
+        'https://loremflickr.com/800/600?lock=20&random=1',
       ]),
       sehir: 'Bursa',
       ilce: 'Nilüfer',
@@ -406,7 +406,7 @@ async function main() {
       kategori: 'Laptop & Notebook',
       altKategori: 'İş Laptopu',
       resimler: JSON.stringify([
-        'https://picsum.photos/seed/thinkpadx1/800/600',
+        'https://loremflickr.com/800/600?lock=21&random=1',
       ]),
       sehir: 'Ankara',
       ilce: 'Çankaya',

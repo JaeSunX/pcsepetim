@@ -4,11 +4,14 @@ import Link from 'next/link'
 import { prisma } from '@/lib/prisma'
 import { formatFiyat, formatTarih, parseResimler, dopingAktifMi } from '@/lib/utils'
 import type { IlanKarti as IlanTip } from '@/lib/types'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
 import {
   MapPin, Eye, Clock, Phone, User, Calendar,
-  Star, Home, Zap, ChevronLeft, Shield
+  Star, Home, Zap, ChevronLeft, Shield, Edit
 } from 'lucide-react'
 import IlanDetayClient from '@/components/IlanDetayClient'
+import YorumlarClient from '@/components/YorumlarClient'
 
 const BASE_URL = process.env.NEXTAUTH_URL || 'https://teknoel.com'
 
@@ -51,6 +54,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 }
 
 export default async function IlanDetayPage({ params }: { params: { id: string } }) {
+  const session = await getServerSession(authOptions)
   const ilan = await prisma.ilan.findUnique({
     where: { id: params.id },
     include: {
@@ -184,13 +188,24 @@ export default async function IlanDetayPage({ params }: { params: { id: string }
           <div className="bg-white rounded-2xl shadow-card p-6">
             {/* Başlık & Fiyat */}
             <div className="mb-4">
-              <h1
-                className={`text-2xl ${ilan.kalinYazi && dopingAktif ? 'font-black' : 'font-bold'} ${
-                  ilan.renkliYazi && dopingAktif ? 'text-primary-600' : 'text-gray-900'
-                } mb-3 leading-tight`}
-              >
-                {ilan.baslik}
-              </h1>
+              <div className="flex items-start justify-between gap-4 mb-3">
+                <h1
+                  className={`text-2xl ${ilan.kalinYazi && dopingAktif ? 'font-black' : 'font-bold'} ${
+                    ilan.renkliYazi && dopingAktif ? 'text-primary-600' : 'text-gray-900'
+                  } leading-tight flex-1`}
+                >
+                  {ilan.baslik}
+                </h1>
+                {session?.user?.email === ilan.kullanici.email && (
+                  <Link
+                    href={`/ilan/${ilan.id}/duzenle`}
+                    className="flex items-center gap-2 bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm shrink-0"
+                  >
+                    <Edit size={16} />
+                    Düzenle
+                  </Link>
+                )}
+              </div>
               <p className="text-3xl font-black text-primary-600">{formatFiyat(ilan.fiyat)}</p>
             </div>
 
@@ -320,6 +335,11 @@ export default async function IlanDetayPage({ params }: { params: { id: string }
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Yorumlar */}
+      <div className="mt-8">
+        <YorumlarClient ilanId={ilan.id} />
       </div>
 
       {/* Benzer İlanlar */}

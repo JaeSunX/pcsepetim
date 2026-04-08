@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
 
     if (kullaniciId) {
       // Belirli kullanıcının profilini getir (halka açık)
-      const kullanici = await prisma.user.findUnique({
+      const kullanici = await prisma.User.findUnique({
         where: { id: kullaniciId },
         select: {
           id: true,
@@ -43,7 +43,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ hata: 'Giriş yapmanız gerekiyor.' }, { status: 401 })
     }
 
-    const kullanici = await prisma.user.findUnique({
+    const kullanici = await prisma.User.findUnique({
       where: { email: session.user.email },
       select: {
         id: true,
@@ -92,7 +92,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ hata: 'Şifre en az 6 karakter olmalıdır.' }, { status: 400 })
     }
 
-    const mevcutKullanici = await prisma.user.findUnique({
+    const mevcutKullanici = await prisma.User.findUnique({
       where: { email },
     })
 
@@ -105,7 +105,7 @@ export async function POST(request: NextRequest) {
 
     const hashliSifre = await bcrypt.hash(sifre, 10)
 
-    const kullanici = await prisma.user.create({
+    const kullanici = await prisma.User.create({
       data: {
         ad: ad.trim(),
         email: email.trim().toLowerCase(),
@@ -139,7 +139,7 @@ export async function PATCH(request: NextRequest) {
     const body = await request.json()
     const { ad, telefon, sehir, biyografi, yeniSifre, mevcutSifre } = body
 
-    const kullanici = await prisma.user.findUnique({
+    const kullanici = await prisma.User.findUnique({
       where: { email: session.user.email },
     })
 
@@ -161,7 +161,7 @@ export async function PATCH(request: NextRequest) {
       updateData.sifre = await bcrypt.hash(yeniSifre, 10)
     }
 
-    await prisma.user.update({
+    await prisma.User.update({
       where: { id: kullanici.id },
       data: updateData,
     })

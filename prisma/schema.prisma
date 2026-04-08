@@ -19,6 +19,7 @@ model User {
   emailVerified DateTime?
   ilanlar   Ilan[]
   odemeler  Odeme[]
+  yorumlar  Yorum[]
   olusturma DateTime @default(now())
   guncelleme DateTime @updatedAt
 
@@ -47,6 +48,7 @@ model Ilan {
   kullanici   User @relation(fields: [kullaniciId], references: [id], onDelete: Cascade)
   kullaniciId String
   odemeler    Odeme[]
+  yorumlar    Yorum[]
 
   goruntuleme Int       @default(0)
   olusturma   DateTime  @default(now())
@@ -93,4 +95,20 @@ model Odeme {
 
   @@index([ilanId])
   @@map("odemeler")
+}
+
+model Yorum {
+  id        String   @id @default(cuid())
+  icerik    String   @db.Text
+  puan      Int?     // 1-5 arası puan
+  ilanId    String
+  ilan      Ilan     @relation(fields: [ilanId], references: [id], onDelete: Cascade)
+  kullaniciId String
+  kullanici User     @relation(fields: [kullaniciId], references: [id], onDelete: Cascade)
+  olusturma DateTime @default(now())
+  guncelleme DateTime @updatedAt
+
+  @@index([ilanId])
+  @@index([kullaniciId])
+  @@map("yorumlar")
 }

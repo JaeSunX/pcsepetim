@@ -1,7 +1,7 @@
 import { prisma } from '../lib/prisma'
 
 function getProductImageUrl(productType: string, index: number = 1): string {
-  const seeds = {
+  const seeds: Record<string, string[]> = {
     'rtx4090': ['gpu', 'graphics-card', 'gaming-pc', 'nvidia'],
     'iphone15': ['smartphone', 'mobile-phone', 'apple-phone', 'ios'],
     'macbook': ['laptop', 'computer', 'apple-laptop', 'mac'],
@@ -21,7 +21,7 @@ function getProductImageUrl(productType: string, index: number = 1): string {
   const productSeeds = seeds[productType] || ['technology', 'electronics', 'computer']
   const seed = productSeeds[(index - 1) % productSeeds.length]
 
-  return `https://picsum.photos/seed/${seed}/800/600`
+  return `https://loremflickr.com/800/600?lock=${seed.length}&random=1`
 }
 
 function extractProductType(title: string): string {

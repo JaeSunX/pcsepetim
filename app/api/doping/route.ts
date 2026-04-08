@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ hata: 'Giriş yapmanız gerekiyor.' }, { status: 401 })
     }
 
-    const kullanici = await prisma.user.findUnique({
+    const kullanici = await prisma.User.findUnique({
       where: { email: session.user.email },
     })
 
