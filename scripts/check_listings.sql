@@ -1,0 +1,1 @@
+SELECT id, baslik, resimler FROM ilanlar WHERE durum = 'AKTIF' LIMIT 5;
