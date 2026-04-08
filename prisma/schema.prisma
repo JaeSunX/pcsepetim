@@ -28,7 +28,7 @@ model User {
 model Ilan {
   id          String    @id @default(cuid())
   baslik      String
-  aciklama    String
+  aciklama    String    @db.Text
   fiyat       Float
   kategori    String
   altKategori String?
@@ -65,7 +65,7 @@ model Ilan {
 model DopingPaket {
   id          String   @id @default(cuid())
   ad          String
-  aciklama    String
+  aciklama    String   @db.Text
   fiyat       Float
   gun         Int
   vitrin      Boolean  @default(false)
