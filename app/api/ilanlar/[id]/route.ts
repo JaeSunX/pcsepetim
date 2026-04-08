@@ -14,6 +14,7 @@ export async function GET(
         kullanici: {
           select: {
             id: true,
+            email: true,
             ad: true,
             telefon: true,
             sehir: true,

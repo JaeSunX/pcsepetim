@@ -61,6 +61,7 @@ export default async function IlanDetayPage({ params }: { params: { id: string }
       kullanici: {
         select: {
           id: true,
+          email: true,
           ad: true,
           telefon: true,
           sehir: true,
