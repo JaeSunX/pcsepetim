@@ -406,10 +406,10 @@ async function main() {
   lines.push(';')
   lines.push('')
   lines.push('-- -----------------------------------------------------')
-  lines.push('-- Seed data for table `kullanicilar`')
+  lines.push('-- Seed data for table `Users`')
   lines.push('-- -----------------------------------------------------')
   lines.push(
-    'INSERT INTO `kullanicilar` (`id`, `email`, `sifre`, `ad`, `telefon`, `sehir`, `biyografi`) VALUES',
+    'INSERT INTO `Users` (`id`, `email`, `sifre`, `ad`, `telefon`, `sehir`, `biyografi`) VALUES',
   )
   lines.push(
     users

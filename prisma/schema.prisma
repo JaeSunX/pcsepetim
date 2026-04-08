@@ -21,7 +21,7 @@ model Kullanici {
   olusturma DateTime @default(now())
   guncelleme DateTime @updatedAt
 
-  @@map("kullanicilar")
+  @@map("Users")
 }
 
 model Ilan {

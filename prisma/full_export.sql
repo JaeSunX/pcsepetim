@@ -5,7 +5,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- Prisma schema based MySQL DDL
 -- Generated from prisma/schema.prisma
 
-CREATE TABLE `kullanicilar` (
+CREATE TABLE `Users` (
   `id` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `sifre` varchar(255) NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE `ilanlar` (
   KEY `ilanlar_olusturma_idx` (`olusturma`),
   KEY `ilanlar_vitrin_dopingBitis_idx` (`vitrin`,`dopingBitis`),
   KEY `ilanlar_anasayfaPin_dopingBitis_idx` (`anasayfaPin`,`dopingBitis`),
-  CONSTRAINT `ilanlar_kullaniciId_fkey` FOREIGN KEY (`kullaniciId`) REFERENCES `kullanicilar` (`id`) ON DELETE CASCADE
+  CONSTRAINT `ilanlar_kullaniciId_fkey` FOREIGN KEY (`kullaniciId`) REFERENCES `Users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `odemeler` (
@@ -77,7 +77,7 @@ CREATE TABLE `odemeler` (
   PRIMARY KEY (`id`),
   KEY `odemeler_ilanId_idx` (`ilanId`),
   CONSTRAINT `odemeler_ilanId_fkey` FOREIGN KEY (`ilanId`) REFERENCES `ilanlar` (`id`),
-  CONSTRAINT `odemeler_kullaniciId_fkey` FOREIGN KEY (`kullaniciId`) REFERENCES `kullanicilar` (`id`),
+  CONSTRAINT `odemeler_kullaniciId_fkey` FOREIGN KEY (`kullaniciId`) REFERENCES `Users` (`id`),
   CONSTRAINT `odemeler_paketId_fkey` FOREIGN KEY (`paketId`) REFERENCES `doping_paketler` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -93,9 +93,9 @@ INSERT INTO `doping_paketler` (`id`, `ad`, `aciklama`, `fiyat`, `gun`, `vitrin`,
 ;
 
 -- -----------------------------------------------------
--- Seed data for table `kullanicilar`
+-- Seed data for table `Users`
 -- -----------------------------------------------------
-INSERT INTO `kullanicilar` (`id`, `email`, `sifre`, `ad`, `telefon`, `sehir`, `biyografi`) VALUES
+INSERT INTO `Users` (`id`, `email`, `sifre`, `ad`, `telefon`, `sehir`, `biyografi`) VALUES
 ('kullanici-demo', 'demo@teknoel.com', '$2a$10$hMfhsl3CgRNNYUDOQdoDDODNLkBRjLB821KxJGhwIsX3aXgTBKbIK', 'Demo Kullanıcı', '0532 111 22 33', 'İstanbul', 'Teknoloji meraklısı, güvenilir satıcı.'),
 ('kullanici-ahmet', 'ahmet@teknoel.com', '$2a$10$htKooOU4Ij81zHomd1QBdukx6cKK0vwE0SvI1I.rtr/u4xKTSn.nS', 'Ahmet Yılmaz', '0533 222 33 44', 'Ankara', 'Bilgisayar mühendisi, ikinci el teknoloji satıcısı.'),
 ('kullanici-mehmet', 'mehmet@teknoel.com', '$2a$10$Rt2FLWjoZid3FJsqzSwTuuqN1L41.ZG9eq.3ZMbrJolPTjTGsgEC2', 'Mehmet Kaya', '0535 333 44 55', 'İzmir', 'Oyun dünyasının satıcısı, konsol uzmanı.')

@@ -1,7 +1,7 @@
 -- Prisma schema based MySQL DDL
 -- Generated from prisma/schema.prisma
 
-CREATE TABLE `kullanicilar` (
+CREATE TABLE `Users` (
   `id` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `sifre` varchar(255) NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE `ilanlar` (
   KEY `ilanlar_olusturma_idx` (`olusturma`),
   KEY `ilanlar_vitrin_dopingBitis_idx` (`vitrin`,`dopingBitis`),
   KEY `ilanlar_anasayfaPin_dopingBitis_idx` (`anasayfaPin`,`dopingBitis`),
-  CONSTRAINT `ilanlar_kullaniciId_fkey` FOREIGN KEY (`kullaniciId`) REFERENCES `kullanicilar` (`id`) ON DELETE CASCADE
+  CONSTRAINT `ilanlar_kullaniciId_fkey` FOREIGN KEY (`kullaniciId`) REFERENCES `Users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `odemeler` (
@@ -73,6 +73,6 @@ CREATE TABLE `odemeler` (
   PRIMARY KEY (`id`),
   KEY `odemeler_ilanId_idx` (`ilanId`),
   CONSTRAINT `odemeler_ilanId_fkey` FOREIGN KEY (`ilanId`) REFERENCES `ilanlar` (`id`),
-  CONSTRAINT `odemeler_kullaniciId_fkey` FOREIGN KEY (`kullaniciId`) REFERENCES `kullanicilar` (`id`),
+  CONSTRAINT `odemeler_kullaniciId_fkey` FOREIGN KEY (`kullaniciId`) REFERENCES `Users` (`id`),
   CONSTRAINT `odemeler_paketId_fkey` FOREIGN KEY (`paketId`) REFERENCES `doping_paketler` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
