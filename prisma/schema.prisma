@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Kullanici {
+model User {
   id        String   @id @default(cuid())
   email     String   @unique
   sifre     String
@@ -43,7 +43,7 @@ model Ilan {
   kalinYazi   Boolean   @default(false)
   dopingBitis DateTime?
 
-  kullanici   Kullanici @relation(fields: [kullaniciId], references: [id], onDelete: Cascade)
+  kullanici   User @relation(fields: [kullaniciId], references: [id], onDelete: Cascade)
   kullaniciId String
   odemeler    Odeme[]
 
@@ -82,7 +82,7 @@ model Odeme {
   id          String      @id @default(cuid())
   ilanId      String
   ilan        Ilan        @relation(fields: [ilanId], references: [id])
-  kullanici   Kullanici   @relation(fields: [kullaniciId], references: [id])
+  kullanici   User   @relation(fields: [kullaniciId], references: [id])
   kullaniciId String
   paket       DopingPaket @relation(fields: [paketId], references: [id])
   paketId     String

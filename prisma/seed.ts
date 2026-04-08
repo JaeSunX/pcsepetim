@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcryptjs'
-
-const prisma = new PrismaClient()
 
 async function main() {
   console.log('🌱 Veritabanı tohumlanıyor...')
@@ -85,7 +83,7 @@ async function main() {
   const sifre2 = await bcrypt.hash('sifre123', 10)
   const sifre3 = await bcrypt.hash('sifre123', 10)
 
-  const kullanici1 = await prisma.kullanici.upsert({
+  const kullanici1 = await prisma.user.upsert({
     where: { email: 'demo@teknoel.com' },
     update: {},
     create: {
@@ -98,7 +96,7 @@ async function main() {
     },
   })
 
-  const kullanici2 = await prisma.kullanici.upsert({
+  const kullanici2 = await prisma.user.upsert({
     where: { email: 'ahmet@teknoel.com' },
     update: {},
     create: {
@@ -111,7 +109,7 @@ async function main() {
     },
   })
 
-  const kullanici3 = await prisma.kullanici.upsert({
+  const kullanici3 = await prisma.user.upsert({
     where: { email: 'mehmet@teknoel.com' },
     update: {},
     create: {
