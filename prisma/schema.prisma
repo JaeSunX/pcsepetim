@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -45,6 +45,7 @@ model Ilan {
 
   kullanici   Kullanici @relation(fields: [kullaniciId], references: [id], onDelete: Cascade)
   kullaniciId String
+  odemeler    Odeme[]
 
   goruntuleme Int       @default(0)
   olusturma   DateTime  @default(now())
@@ -80,6 +81,7 @@ model DopingPaket {
 model Odeme {
   id          String      @id @default(cuid())
   ilanId      String
+  ilan        Ilan        @relation(fields: [ilanId], references: [id])
   kullanici   Kullanici   @relation(fields: [kullaniciId], references: [id])
   kullaniciId String
   paket       DopingPaket @relation(fields: [paketId], references: [id])
@@ -88,5 +90,6 @@ model Odeme {
   durum       String      @default("TAMAMLANDI")
   olusturma   DateTime    @default(now())
 
+  @@index([ilanId])
   @@map("odemeler")
 }
