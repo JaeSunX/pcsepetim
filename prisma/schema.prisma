@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Kullanici {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  sifre     String
+  ad        String
+  telefon   String?
+  sehir     String?
+  avatar    String?
+  biyografi String?
+  ilanlar   Ilan[]
+  odemeler  Odeme[]
+  olusturma DateTime @default(now())
+  guncelleme DateTime @updatedAt
+
+  @@map("kullanicilar")
+}
+
+model Ilan {
+  id          String    @id @default(cuid())
+  baslik      String
+  aciklama    String
+  fiyat       Float
+  kategori    String
+  altKategori String?
+  resimler    String    // JSON string dizi
+  durum       String    @default("AKTIF") // AKTIF, PASIF, SATILDI
+  sehir       String
+  ilce        String?
+
+  // Doping özellikleri
+  vitrin      Boolean   @default(false)
+  anasayfaPin Boolean   @default(false)
+  renkliYazi  Boolean   @default(false)
+  kalinYazi   Boolean   @default(false)
+  dopingBitis DateTime?
+
+  kullanici   Kullanici @relation(fields: [kullaniciId], references: [id], onDelete: Cascade)
+  kullaniciId String
+
+  goruntuleme Int       @default(0)
+  olusturma   DateTime  @default(now())
+  guncelleme  DateTime  @updatedAt
+
+  @@index([durum])
+  @@index([kategori])
+  @@index([sehir])
+  @@index([kullaniciId])
+  @@index([olusturma])
+  @@index([vitrin, dopingBitis])
+  @@index([anasayfaPin, dopingBitis])
+  @@map("ilanlar")
+}
+
+model DopingPaket {
+  id          String   @id @default(cuid())
+  ad          String
+  aciklama    String
+  fiyat       Float
+  gun         Int
+  vitrin      Boolean  @default(false)
+  anasayfa    Boolean  @default(false)
+  renkliYazi  Boolean  @default(false)
+  kalinYazi   Boolean  @default(false)
+  populer     Boolean  @default(false)
+  renk        String   @default("blue")
+  odemeler    Odeme[]
+
+  @@map("doping_paketler")
+}
+
+model Odeme {
+  id          String      @id @default(cuid())
+  ilanId      String
+  kullanici   Kullanici   @relation(fields: [kullaniciId], references: [id])
+  kullaniciId String
+  paket       DopingPaket @relation(fields: [paketId], references: [id])
+  paketId     String
+  tutar       Float
+  durum       String      @default("TAMAMLANDI")
+  olusturma   DateTime    @default(now())
+
+  @@map("odemeler")
+}
